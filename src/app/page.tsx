@@ -18,7 +18,7 @@ export default function HomePage() {
             <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white mb-4">
               🎉 Grand Launch Sale — Up to 50% OFF
             </span>
-            <h1 className="text-3xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: "'Sora', sans-serif", lineHeight: '1.15' }}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
               Your Brand.<br />Your Store.<br />Your Rules.
             </h1>
             <p className="text-base sm:text-lg text-white/80 mb-8" style={{ lineHeight: '1.6' }}>
@@ -63,7 +63,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-12">
         {/* Categories */}
         <section>
           <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ fontFamily: "'Sora', sans-serif", color: 'var(--text-primary)' }}>

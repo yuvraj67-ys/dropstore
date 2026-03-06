@@ -23,17 +23,19 @@ export default function AdminDashboard() {
             {/* Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {stats.map((stat) => (
-                    <div key={stat.label} className="bg-surface rounded-xl border border-border p-4">
+                    <div key={stat.label} className="bg-surface rounded-xl border border-border p-4 flex flex-col">
                         <div className="flex items-center justify-between mb-3">
                             <span className="text-xs font-semibold uppercase" style={{ color: 'var(--text-muted)' }}>{stat.label}</span>
                             <div className="w-9 h-9 rounded-lg bg-primary-light flex items-center justify-center">
                                 <stat.icon size={18} className="text-primary" />
                             </div>
                         </div>
-                        <p className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>{stat.value}</p>
-                        <p className={`text-xs font-medium mt-1 ${stat.color}`}>
-                            <TrendingUp size={12} className="inline mr-1" />{stat.change}
-                        </p>
+                        <div className="flex flex-col gap-1 mt-auto">
+                            <p className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>{stat.value}</p>
+                            <p className={`text-xs font-medium ${stat.color}`}>
+                                <TrendingUp size={12} className="inline mr-1 shrink-0" />{stat.change}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -45,7 +47,7 @@ export default function AdminDashboard() {
                         <h2 className="text-sm font-bold" style={{ fontFamily: "'Sora', sans-serif", color: 'var(--text-primary)' }}>Recent Orders</h2>
                         <Link href="/admin/orders" className="text-xs text-primary font-medium hover:underline">View All</Link>
                     </div>
-                    <div className="space-y-3">
+                    <div className="flex flex-col gap-3">
                         {MOCK_ORDERS.map((order) => (
                             <div key={order.orderNumber} className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--background)' }}>
                                 <div>
@@ -69,7 +71,7 @@ export default function AdminDashboard() {
                         <h2 className="text-sm font-bold" style={{ fontFamily: "'Sora', sans-serif", color: 'var(--text-primary)' }}>Low Stock Alerts</h2>
                         <Link href="/admin/products" className="text-xs text-primary font-medium hover:underline">Manage</Link>
                     </div>
-                    <div className="space-y-3">
+                    <div className="flex flex-col gap-3">
                         {lowStockProducts.map((product) => (
                             <div key={product.id} className="flex items-center gap-3 p-3 rounded-lg" style={{ background: 'var(--background)' }}>
                                 <AlertTriangle size={16} className={product.stock < 5 ? 'text-error' : 'text-warning'} />

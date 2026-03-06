@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { LayoutDashboard, Package, ShoppingBag, Users, Tags, Ticket, Settings, LogOut, ChevronLeft } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuthStore } from '@/store/authStore';
 
 const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
@@ -17,7 +18,21 @@ const menuItems = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const router = useRouter();
+    const { user, isAuthenticated } = useAuthStore();
     const [collapsed, setCollapsed] = useState(false);
+    const [isAuthorized, setIsAuthorized] = useState(false);
+
+    useEffect(() => {
+        if (!isAuthenticated || user?.role !== 'admin') {
+            router.push('/login');
+        } else {
+            setIsAuthorized(true);
+        }
+    }, [isAuthenticated, user, router]);
+
+    if (!isAuthorized) return null; // Avoid flashing the layout before redirecting
+
 
     return (
         <div className="flex min-h-[calc(100vh-64px)]">
@@ -29,12 +44,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         <ChevronLeft size={16} className={`transition-transform ${collapsed ? 'rotate-180' : ''}`} />
                     </button>
                 </div>
-                <nav className="flex-1 py-2 space-y-0.5 px-2">
+                <nav className="flex-1 py-4 flex flex-col gap-1 px-2">
                     {menuItems.map((item) => {
                         const isActive = pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href));
                         return (
                             <Link key={item.label} href={item.href} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-primary text-white' : 'hover:bg-border-light'}`} style={!isActive ? { color: 'var(--text-secondary)' } : undefined} title={collapsed ? item.label : undefined}>
-                                <item.icon size={18} />
+                                <item.icon size={18} className="shrink-0" />
                                 {!collapsed && <span>{item.label}</span>}
                             </Link>
                         );

@@ -185,12 +185,12 @@ export default function ProductDetailPage() {
 
             {/* Tabs */}
             <div className="mt-12">
-                <div className="flex border-b border-border gap-0">
+                <div className="flex border-b border-border gap-2 sm:gap-6 overflow-x-auto hide-scrollbar">
                     {(['description', 'reviews', 'shipping'] as const).map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
-                            className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors capitalize ${activeTab === tab ? 'border-primary text-primary' : 'border-transparent'}`}
+                            className={`px-3 sm:px-5 py-3 text-sm font-medium border-b-2 transition-colors capitalize whitespace-nowrap ${activeTab === tab ? 'border-primary text-primary' : 'border-transparent'}`}
                             style={activeTab !== tab ? { color: 'var(--text-muted)' } : undefined}
                         >
                             {tab === 'reviews' ? `Reviews (${reviews.length})` : tab}
@@ -202,7 +202,7 @@ export default function ProductDetailPage() {
                         <p className="text-sm leading-relaxed max-w-2xl" style={{ color: 'var(--text-secondary)' }}>{product.description}</p>
                     )}
                     {activeTab === 'reviews' && (
-                        <div className="space-y-4 max-w-2xl">
+                        <div className="flex flex-col gap-4 max-w-2xl">
                             {reviews.length > 0 ? reviews.map((review) => (
                                 <div key={review.id} className="p-4 rounded-xl border border-border">
                                     <div className="flex items-center gap-2 mb-2">
@@ -223,7 +223,7 @@ export default function ProductDetailPage() {
                         </div>
                     )}
                     {activeTab === 'shipping' && (
-                        <div className="text-sm space-y-2 max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
+                        <div className="text-sm flex flex-col gap-2 max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
                             <p>• Free shipping on orders above ₹499</p>
                             <p>• Standard delivery: 5-7 business days</p>
                             <p>• Express delivery available at checkout</p>

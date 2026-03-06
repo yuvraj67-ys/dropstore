@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${sora.variable} ${dmSans.variable} antialiased`} style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <body className={`${sora.variable} ${dmSans.variable} antialiased`}>
         <ThemeInitializer />
         <Toaster
           position="top-right"
